@@ -3,12 +3,12 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
     name: "Button",
-    props: ['className']
+    props: ['className', 'title', 'onClick']
 })
 </script>
 
 <template>
-    <button class="btn" :class="className">Submit</button>
+    <button @click.prevent="onClick" class="btn" :class="className">{{ title }}</button>
 </template>
 
 <style scoped>

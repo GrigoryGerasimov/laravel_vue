@@ -1,8 +1,13 @@
 <script>
 import { defineComponent } from 'vue'
+import { TableComponent } from '../Common'
 
 export default defineComponent({
     name: "IndexComponent",
+
+    components: {
+        TableComponent
+    },
 
     data() {
         return {
@@ -12,8 +17,12 @@ export default defineComponent({
 
     methods: {
         async getPeople() {
-            const response = await axios.get('api/people')
+            const response = await axios.get('/api/people')
             this.people = response.data
+        },
+
+        filterHandler() {
+            return this.getPeopleFilteredByAge;
         }
     },
 
@@ -31,26 +40,7 @@ export default defineComponent({
 </script>
 
 <template>
-    <table class="table table-striped table-hover text-center">
-        <thead>
-        <tr scope="row">
-            <th>ID</th>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Gender</th>
-            <th>Occupation</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr scope="row" v-for="person in people" :key="person.id">
-            <td>{{ person.id }}</td>
-            <td>{{ person.name }}</td>
-            <td>{{ person.age }}</td>
-            <td>{{ person.gender }}</td>
-            <td>{{ person.occupation }}</td>
-        </tr>
-        </tbody>
-    </table>
+    <TableComponent :people="people" :onClick="filterHandler"/>
 </template>
 
 <style scoped>

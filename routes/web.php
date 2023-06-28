@@ -21,6 +21,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['namespace' => 'App\Http\Controllers\Vues', 'prefix' => 'vues'], function () {
-    Route::get('/', 'IndexController')->name('vues.index');
+Route::group(['namespace' => 'App\Http\Controllers\People', 'prefix' => 'people'], function () {
+    Route::get('/', 'IndexController')->name('people.index');
 });
