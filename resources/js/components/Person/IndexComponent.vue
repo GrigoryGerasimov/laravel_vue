@@ -1,8 +1,8 @@
 <script>
-import {defineComponent} from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
-    name: "PeopleComponent",
+    name: "IndexComponent",
 
     data() {
         return {
@@ -14,17 +14,18 @@ export default defineComponent({
         async getPeople() {
             const response = await axios.get('api/people')
             this.people = response.data
-        },
-
-        getPeopleFilteredByAge() {
-            return this.people = this.people.filter(person => person.age > 30);
         }
     },
 
     async mounted() {
         await this.getPeople()
-        this.getPeopleFilteredByAge()
     },
+
+    computed: {
+        getPeopleFilteredByAge() {
+            return this.people = this.people.filter(person => person.age > 30);
+        }
+    }
 
 })
 </script>
@@ -33,6 +34,7 @@ export default defineComponent({
     <table class="table table-striped table-hover text-center">
         <thead>
         <tr scope="row">
+            <th>ID</th>
             <th>Name</th>
             <th>Age</th>
             <th>Gender</th>
@@ -40,7 +42,8 @@ export default defineComponent({
         </tr>
         </thead>
         <tbody>
-        <tr scope="row" v-for="person in people">
+        <tr scope="row" v-for="person in people" :key="person.id">
+            <td>{{ person.id }}</td>
             <td>{{ person.name }}</td>
             <td>{{ person.age }}</td>
             <td>{{ person.gender }}</td>
