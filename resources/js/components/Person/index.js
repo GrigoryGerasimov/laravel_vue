@@ -1,4 +1,4 @@
-import BeginnerComponentInCompositionAPI from './BeginnerComponentInCompositionAPI.vue';
+import StoreComponent from './StoreComponent.vue';
 import IndexComponent from "./IndexComponent.vue";
 
-export { BeginnerComponentInCompositionAPI, IndexComponent };
+export { StoreComponent, IndexComponent };

@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <people-component></people-component>
+    <people-store-component></people-store-component>
+    <people-index-component></people-index-component>
 @endsection

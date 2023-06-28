@@ -15,10 +15,10 @@ import { createApp } from 'vue';
 
 const app = createApp({});
 
-import { BeginnerComponentInCompositionAPI, IndexComponent } from "./components/Person";
+import { StoreComponent, IndexComponent } from "./components/Person";
 
-app.component('beginner-component-in-composition-api', BeginnerComponentInCompositionAPI);
-app.component('people-component', IndexComponent)
+app.component('people-store-component', StoreComponent);
+app.component('people-index-component', IndexComponent)
 
 /**
  * The following block of code may be used to automatically register your

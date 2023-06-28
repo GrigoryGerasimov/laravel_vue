@@ -1,5 +1,5 @@
 <script>
-import {defineComponent} from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
     name: "IndexComponent",
@@ -42,7 +42,7 @@ export default defineComponent({
         </tr>
         </thead>
         <tbody>
-        <tr scope="row" v-for="person in getPeopleFilteredByAge" :key="person.id">
+        <tr scope="row" v-for="person in people" :key="person.id">
             <td>{{ person.id }}</td>
             <td>{{ person.name }}</td>
             <td>{{ person.age }}</td>
