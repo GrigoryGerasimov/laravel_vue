@@ -1,0 +1,30 @@
+<script>
+import { defineComponent } from 'vue'
+import TableHeader from './TableHeader.vue'
+import TableBody from './TableBody.vue'
+import TableFooter from './TableFooter.vue'
+
+export default defineComponent({
+    name: "TableComponent",
+
+    components: {
+        TableHeader,
+        TableBody,
+        TableFooter
+    },
+
+    props: ['people', 'onClick']
+})
+</script>
+
+<template>
+    <table class="table table-striped table-hover text-center">
+        <TableHeader/>
+        <TableFooter :onClick="onClick"/>
+        <TableBody :people="people"/>
+    </table>
+</template>
+
+<style scoped>
+
+</style>
