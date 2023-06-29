@@ -18,7 +18,7 @@ export default defineComponent({
 </script>
 
 <template>
-    <table class="table table-striped table-hover text-center">
+    <table class="table table-hover text-center">
         <TableHeader/>
         <TableFooter :onClick="onClick"/>
         <TableBody :people="people"/>

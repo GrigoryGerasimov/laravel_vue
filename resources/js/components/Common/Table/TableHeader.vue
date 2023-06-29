@@ -14,6 +14,7 @@ export default defineComponent({
         <th>Age</th>
         <th>Gender</th>
         <th>Occupation</th>
+        <th colspan="2"></th>
     </tr>
     </thead>
 </template>
