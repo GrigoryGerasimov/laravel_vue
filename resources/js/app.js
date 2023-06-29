@@ -6,6 +6,11 @@
 
 import './bootstrap';
 import { createApp } from 'vue';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faTrash, faEdit, faCheck, faUndo } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faTrash, faEdit, faCheck, faUndo)
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -17,8 +22,9 @@ const app = createApp({});
 
 import { StoreComponent, IndexComponent } from "./components/Person";
 
-app.component('people-store-component', StoreComponent);
+app.component('people-store-component', StoreComponent)
 app.component('people-index-component', IndexComponent)
+app.component('font-awesome-icon', FontAwesomeIcon)
 
 /**
  * The following block of code may be used to automatically register your

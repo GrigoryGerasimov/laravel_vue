@@ -1,12 +1,12 @@
 <script>
 import { defineComponent } from 'vue'
-import { FormControl, Button } from '../Common'
+import { FormControlLabelled, Button } from '../Common'
 
 export default defineComponent({
     name: 'StoreComponent',
 
     components: {
-        FormControl,
+        FormControlLabelled,
         Button
     },
 
@@ -42,10 +42,10 @@ export default defineComponent({
 <template>
     <div class="row mb-5">
         <div class="col-12">
-            <FormControl :id="'name'" :placeholder="'Name'" v-model.trim="name"/>
-            <FormControl :id="'age'" :placeholder="'Age'" v-model.trim="age"/>
-            <FormControl :id="'gender'" :placeholder="'Gender'" v-model.trim="gender"/>
-            <FormControl :id="'occupation'" :placeholder="'Occupation'" v-model.trim="occupation"/>
+            <FormControlLabelled :id="'c-name'" :placeholder="'Name'" v-model.trim="name"/>
+            <FormControlLabelled :id="'c-age'" :placeholder="'Age'" v-model.trim="age"/>
+            <FormControlLabelled :id="'c-gender'" :placeholder="'Gender'" v-model.trim="gender"/>
+            <FormControlLabelled :id="'c-occupation'" :placeholder="'Occupation'" v-model.trim="occupation"/>
             <Button :className="'btn-outline-success w-25 mt-3 mx-5 align-self-end'" :title="'Submit'" :onClick="storeHandler"/>
         </div>
     </div>
