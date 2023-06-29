@@ -7,10 +7,6 @@ export default defineComponent({
 
     data() {
         return {
-            name: null,
-            age: null,
-            gender: null,
-            occupation: null,
             editModeActiveForId: null
         }
     },
@@ -18,7 +14,7 @@ export default defineComponent({
     props: {
         people: {
             type: Array,
-            required: false
+            default: () => []
         }
     },
 
@@ -36,41 +32,41 @@ export default defineComponent({
 
 <template>
     <tbody v-for="person in people" :key="person.id">
-    <tr scope="row" v-if="editModeActiveForId !== person.id">
-        <td>{{ person.id }}</td>
-        <td>{{ person.name }}</td>
-        <td>{{ person.age }}</td>
-        <td>{{ person.gender }}</td>
-        <td>{{ person.occupation }}</td>
-        <td>
+    <tr scope="row" class="col-12" v-if="editModeActiveForId !== person.id">
+        <td class="col-2">{{ person.id }}</td>
+        <td class="col-2">{{ person.name }}</td>
+        <td class="col-2">{{ person.age }}</td>
+        <td class="col-2">{{ person.gender }}</td>
+        <td class="col-2">{{ person.occupation }}</td>
+        <td class="col-1">
             <a href="#" role="button" class="text-decoration-none text-dark" @click.prevent="switchEditModeHandler(person.id)">
                 <font-awesome-icon :icon="['fas', 'edit']" />
             </a>
         </td>
-        <td>
+        <td class="col-1">
             <font-awesome-icon :icon="['fas', 'trash']" />
         </td>
     </tr>
-    <tr scope="row" v-if="editModeActiveForId === person.id">
-        <td>{{ person.id }}</td>
-        <td>
-            <FormControl :id="`${person.id}-u-name`" :placeholder="'Name'" v-model="name"/>
+    <tr scope="row" class="col-12" v-if="editModeActiveForId === person.id">
+        <td class="col-2">{{ person.id }}</td>
+        <td class="col-2">
+            <FormControl :id="`${person.id}-u-name`" placeholder="Name" v-model="person.name"/>
         </td>
-        <td>
-            <FormControl :id="`${person.id}-u-age`" :placeholder="'Age'" v-model="age"/>
+        <td class="col-2">
+            <FormControl :id="`${person.id}-u-age`" type="number" placeholder="Age" v-model="person.age"/>
         </td>
-        <td>
-            <FormControl :id="`${person.id}-u-gender`" :placeholder="'Gender'" v-model="gender"/>
+        <td class="col-2">
+            <FormControl :id="`${person.id}-u-gender`" placeholder="Gender" v-model="person.gender"/>
         </td>
-        <td>
-            <FormControl :id="`${person.id}-u-occupation`" :placeholder="'Occupation'" v-model="occupation"/>
+        <td class="col-2">
+            <FormControl :id="`${person.id}-u-occupation`" placeholder="Occupation" v-model="person.occupation"/>
         </td>
-        <td>
+        <td class="col-1">
             <a href="#" role="button" class="text-decoration-none text-dark" @click.prevent="">
                 <font-awesome-icon :icon="['fas', 'check']" />
             </a>
         </td>
-        <td>
+        <td class="col-1">
             <a href="#" role="button" class="text-decoration-none text-dark" @click.prevent="switchEditModeHandler">
                 <font-awesome-icon :icon="['fas', 'undo']" />
             </a>
