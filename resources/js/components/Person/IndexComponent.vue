@@ -1,12 +1,19 @@
 <script>
 import { defineComponent, computed } from 'vue'
-import { TableComponent } from '../Common'
+import { Table, TableHeader, TableBody, TableFooter } from '../Common'
+import ShowComponent from './ShowComponent.vue'
+import UpdateComponent from './UpdateComponent.vue'
 
 export default defineComponent({
-    name: "IndexComponent",
+    name: 'IndexComponent',
 
     components: {
-        TableComponent
+        Table,
+        TableFooter,
+        TableBody,
+        TableHeader,
+        ShowComponent,
+        UpdateComponent
     },
 
     data() {
@@ -46,7 +53,18 @@ export default defineComponent({
 </script>
 
 <template>
-    <TableComponent :onClick="filterHandler" v-show="people.length"/>
+    <Table v-show='people.length'>
+        <TableHeader/>
+        <TableFooter :onClick='filterHandler'/>
+        <TableBody>
+            <template #show='{ person, onSwitchEditMode, onDelete }'>
+                <ShowComponent :person='person' :onSwitchEditMode='onSwitchEditMode' :onDelete='onDelete'/>
+            </template>
+            <template #update='{ person, onSwitchEditMode, onSubmit }'>
+                <UpdateComponent :person='person' :onSwitchEditMode='onSwitchEditMode' :onSubmit='onSubmit'/>
+            </template>
+        </TableBody>
+    </Table>
 </template>
 
 <style scoped>

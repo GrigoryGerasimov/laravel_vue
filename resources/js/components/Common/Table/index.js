@@ -1,3 +1,6 @@
-import TableComponent from './TableComponent.vue'
+import Table from './Table.vue'
+import TableHeader from './TableHeader.vue'
+import TableBody from './TableBody.vue'
+import TableFooter from './TableFooter.vue'
 
-export { TableComponent }
+export { Table, TableHeader, TableBody, TableFooter }
