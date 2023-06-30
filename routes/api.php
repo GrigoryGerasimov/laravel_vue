@@ -22,4 +22,5 @@ Route::group(['namespace' => 'App\Http\Controllers\Person', 'prefix' => 'people'
     Route::get('/', 'IndexController')->name('api.people.index');
     Route::post('/', 'StoreController')->name('api.people.store');
     Route::patch('/{person}', 'UpdateController')->name('api.people.update');
+    Route::delete('/{person}', 'DestroyController')->name('api.people.destroy');
 });

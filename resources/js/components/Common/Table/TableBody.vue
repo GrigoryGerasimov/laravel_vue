@@ -58,6 +58,13 @@ export default defineComponent({
                 return personData
             })
             this.switchEditModeHandler(null)
+        },
+
+        async deleteHandler(id) {
+            const isDeleted = await axios.delete(`/api/people/${id}`)
+            if (isDeleted) {
+                this.peopleData = this.peopleData.filter(person => person.id !== id)
+            }
         }
     },
 
@@ -88,7 +95,9 @@ export default defineComponent({
             </a>
         </td>
         <td class="col-1">
-            <font-awesome-icon :icon="['fas', 'trash']" />
+            <a href="#" role="button" class="text-decoration-none text-dark" @click.prevent="deleteHandler(person.id)">
+                <font-awesome-icon :icon="['fas', 'trash']" />
+            </a>
         </td>
     </tr>
     <tr scope="row" class="col-12" v-if="editModeActiveForId === person.id">
