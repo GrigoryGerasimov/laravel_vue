@@ -9,6 +9,8 @@ import { createApp } from 'vue';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faTrash, faEdit, faCheck, faUndo } from '@fortawesome/free-solid-svg-icons'
+import App from './components/App.vue'
+import VueRouter from './router/router.js'
 
 library.add(faTrash, faEdit, faCheck, faUndo)
 
@@ -20,10 +22,11 @@ library.add(faTrash, faEdit, faCheck, faUndo)
 
 const app = createApp({});
 
-import { PersonComponent } from './components/Person'
+
 
 app
-    .component('person-component', PersonComponent)
+    .use(VueRouter)
+    .component('app', App)
     .component('font-awesome-icon', FontAwesomeIcon)
 
 /**
