@@ -40,7 +40,7 @@ export default defineComponent({
 </script>
 
 <template>
-    <TableComponent :people="people" :onClick="filterHandler"/>
+    <TableComponent :people="people" :onClick="filterHandler" v-show="people.length"/>
 </template>
 
 <style scoped>
