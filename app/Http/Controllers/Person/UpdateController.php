@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Http\Controllers\Person;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Person\UpdateRequest;
+use App\Http\Resources\PersonResource;
+use App\Models\Person;
+
+class UpdateController extends Controller
+{
+    public function __invoke(UpdateRequest $request, Person $person): PersonResource
+    {
+        $updatedData = $request->validated();
+
+        $person->update($updatedData);
+
+        return new PersonResource($person);
+    }
+}

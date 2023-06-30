@@ -21,8 +21,16 @@ export default defineComponent({
 
     methods: {
         async storeHandler() {
-            const response = await axios.post('/api/people', this.dataFromInput)
-            console.log(response.data);
+            await axios.post('/api/people', this.dataFromInput)
+            await this.$parent.$refs.index.getPeople()
+            this.resetDataToInit()
+        },
+
+        resetDataToInit() {
+            this.name = null
+            this.age = null
+            this.gender = null
+            this.occupation = null
         }
     },
 
@@ -42,11 +50,11 @@ export default defineComponent({
 <template>
     <div class="row mb-5">
         <div class="col-12">
-            <FormControlLabelled :id="'c-name'" :placeholder="'Name'" v-model.trim="name"/>
-            <FormControlLabelled :id="'c-age'" :placeholder="'Age'" v-model.trim="age"/>
-            <FormControlLabelled :id="'c-gender'" :placeholder="'Gender'" v-model.trim="gender"/>
-            <FormControlLabelled :id="'c-occupation'" :placeholder="'Occupation'" v-model.trim="occupation"/>
-            <Button :className="'btn-outline-success w-25 mt-3 mx-5 align-self-end'" :title="'Submit'" :onClick="storeHandler"/>
+            <FormControlLabelled id="c-name" placeholder="Name" v-model.trim="name"/>
+            <FormControlLabelled id="c-age" type="number" placeholder="Age" v-model.trim="age"/>
+            <FormControlLabelled id="c-gender" placeholder="Gender" v-model.trim="gender"/>
+            <FormControlLabelled id="c-occupation" placeholder="Occupation" v-model.trim="occupation"/>
+            <Button extra-classes="btn-outline-success" title="Submit" :onClick="storeHandler"/>
         </div>
     </div>
 </template>

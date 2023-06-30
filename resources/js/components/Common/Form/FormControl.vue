@@ -1,5 +1,5 @@
 <script>
-import { defineComponent } from 'vue'
+import {defineComponent} from 'vue'
 
 export default defineComponent({
     name: "FormControl",
@@ -9,21 +9,16 @@ export default defineComponent({
             type: String,
             required: true
         },
-
-        className: {
+        inputType: {
             type: String,
-            required: false
+            default: 'text'
         },
-
-        placeholder: {
+        extraClasses: {
             type: String,
-            required: false
+            default: "border-0 border-bottom bg-transparent p-0 m-0 text-center"
         },
-
-        modelValue: {
-            type: String,
-            required: false
-        }
+        placeholder: String,
+        modelValue: [String, Number]
     },
 
     emits: ['update:modelValue']
@@ -31,10 +26,9 @@ export default defineComponent({
 </script>
 
 <template>
-    <div class="row input-group px-5 mb-1 d-flex align-items-baseline">
-        <input class="form-control" :class="className" :value="modelValue" :id="id" :placeholder="placeholder"
-               @input="$emit('update:modelValue', $event.target.value)"/>
-    </div>
+    <input :type="inputType" class="form-control" :class="extraClasses" :value="modelValue" :id="id"
+           :placeholder="placeholder"
+           @input="$emit('update:modelValue', $event.target.value)"/>
 </template>
 
 <style scoped>

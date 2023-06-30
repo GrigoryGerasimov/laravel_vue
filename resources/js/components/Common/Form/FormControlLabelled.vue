@@ -9,18 +9,13 @@ export default defineComponent({
             type: String,
             required: true
         },
-        className: {
+        inputType: {
             type: String,
-            required: false
+            default: 'text'
         },
-        placeholder: {
-            type: String,
-            required: false
-        },
-        modelValue: {
-            type: String,
-            required: false
-        }
+        extraClasses: String,
+        placeholder: String,
+        modelValue: [String, Number]
     },
 
     emits: ['update:modelValue']
@@ -30,10 +25,10 @@ export default defineComponent({
 <template>
     <div class="row input-group px-5 mb-1 d-flex align-items-baseline">
         <div class="col-4">
-            <label class="form-label" :class="className" :for="id">{{ placeholder }}</label>
+            <label class="form-label" :for="id">{{ placeholder }}</label>
         </div>
         <div class="col-8">
-            <input class="form-control" :class="className" :value="modelValue" :id="id" :placeholder="placeholder"
+            <input :type="inputType" class="form-control" :class="extraClasses" :value="modelValue" :id="id" :placeholder="placeholder"
                    @input="$emit('update:modelValue', $event.target.value)"/>
         </div>
     </div>

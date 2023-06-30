@@ -20,11 +20,11 @@ library.add(faTrash, faEdit, faCheck, faUndo)
 
 const app = createApp({});
 
-import { StoreComponent, IndexComponent } from "./components/Person";
+import { PersonComponent } from './components/Person'
 
-app.component('people-store-component', StoreComponent)
-app.component('people-index-component', IndexComponent)
-app.component('font-awesome-icon', FontAwesomeIcon)
+app
+    .component('person-component', PersonComponent)
+    .component('font-awesome-icon', FontAwesomeIcon)
 
 /**
  * The following block of code may be used to automatically register your
