@@ -5,21 +5,12 @@ import { FormControl } from '../'
 export default defineComponent({
     name: "TableBody",
 
-    props: {
-        people: {
-            type: Array,
-            default: () => []
-        }
-    },
+    inject: ['people'],
 
     data() {
         return {
-            name: null,
-            age: null,
-            gender: null,
-            occupation: null,
-            editModeActiveForId: null,
-            peopleData: this.people
+            peopleData: this.people,
+            editModeActiveForId: null
         }
     },
 
@@ -36,45 +27,26 @@ export default defineComponent({
     },
 
     methods: {
-        setPersonInitDataById(id) {
-            const person = this.peopleData.find(person => person.id === id)
-            Object.assign(this, person)
-            this.switchEditModeHandler(id)
-        },
-
-        switchEditModeHandler(id) {
+        switchEditModeHandler(id = null) {
             this.editModeActiveForId = id
         },
 
         async submitHandler(id) {
-            const response = await axios.patch(`/api/people/${id}`, this.updatedData)
+            const updatedPerson = this.people.find(person => person.id === id)
+
+            const response = await axios.patch(`/api/people/${id}`, updatedPerson)
             this.peopleData = this.peopleData.map(personData => {
-                if (personData.id === id) {
-                    personData.name = response.data.name
-                    personData.age = response.data.age
-                    personData.gender = response.data.gender
-                    personData.occupation = response.data.occupation
-                }
+                if (personData.id === id) Object.assign(personData, response.data)
                 return personData
             })
-            this.switchEditModeHandler(null)
+
+            this.switchEditModeHandler()
         },
 
         async deleteHandler(id) {
             const isDeleted = await axios.delete(`/api/people/${id}`)
             if (isDeleted) {
                 this.peopleData = this.peopleData.filter(person => person.id !== id)
-            }
-        }
-    },
-
-    computed: {
-        updatedData() {
-            return {
-                name: this.name,
-                age: this.age,
-                gender: this.gender,
-                occupation: this.occupation
             }
         }
     }
@@ -90,7 +62,7 @@ export default defineComponent({
         <td class="col-2">{{ person.gender }}</td>
         <td class="col-2">{{ person.occupation }}</td>
         <td class="col-1">
-            <a href="#" role="button" class="text-decoration-none text-dark" @click.prevent="setPersonInitDataById(person.id)">
+            <a href="#" role="button" class="text-decoration-none text-dark" @click.prevent="switchEditModeHandler(person.id)">
                 <font-awesome-icon :icon="['fas', 'edit']" />
             </a>
         </td>
@@ -103,16 +75,16 @@ export default defineComponent({
     <tr scope="row" class="col-12" v-if="editModeActiveForId === person.id">
         <td class="col-2">{{ person.id }}</td>
         <td class="col-2">
-            <FormControl :id="`${person.id}-u-name`" placeholder="Name" v-model.trim="name"/>
+            <FormControl :id="`${person.id}-u-name`" placeholder="Name" v-model.trim="person.name"/>
         </td>
         <td class="col-2">
-            <FormControl :id="`${person.id}-u-age`" type="number" placeholder="Age" v-model.trim="age"/>
+            <FormControl :id="`${person.id}-u-age`" type="number" placeholder="Age" v-model.trim="person.age"/>
         </td>
         <td class="col-2">
-            <FormControl :id="`${person.id}-u-gender`" placeholder="Gender" v-model.trim="gender"/>
+            <FormControl :id="`${person.id}-u-gender`" placeholder="Gender" v-model.trim="person.gender"/>
         </td>
         <td class="col-2">
-            <FormControl :id="`${person.id}-u-occupation`" placeholder="Occupation" v-model.trim="occupation"/>
+            <FormControl :id="`${person.id}-u-occupation`" placeholder="Occupation" v-model.trim="person.occupation"/>
         </td>
         <td class="col-1">
             <a href="#" role="button" class="text-decoration-none text-dark" @click.prevent="submitHandler(person.id)">

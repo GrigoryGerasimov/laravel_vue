@@ -1,5 +1,5 @@
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { TableComponent } from '../Common'
 
 export default defineComponent({
@@ -12,6 +12,12 @@ export default defineComponent({
     data() {
         return {
             people: []
+        }
+    },
+
+    provide() {
+        return {
+            people: computed(() => this.people)
         }
     },
 
@@ -40,7 +46,7 @@ export default defineComponent({
 </script>
 
 <template>
-    <TableComponent :people="people" :onClick="filterHandler" v-show="people.length"/>
+    <TableComponent :onClick="filterHandler" v-show="people.length"/>
 </template>
 
 <style scoped>
