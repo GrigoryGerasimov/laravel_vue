@@ -5,16 +5,29 @@ import { FormControl } from '../'
 export default defineComponent({
     name: "TableBody",
 
-    data() {
-        return {
-            editModeActiveForId: null
-        }
-    },
-
     props: {
         people: {
             type: Array,
             default: () => []
+        }
+    },
+
+    data() {
+        return {
+            name: null,
+            age: null,
+            gender: null,
+            occupation: null,
+            editModeActiveForId: null,
+            peopleData: this.people
+        }
+    },
+
+    watch: {
+        people: {
+            handler(newValue) {
+                this.peopleData = newValue
+            }
         }
     },
 
@@ -23,15 +36,46 @@ export default defineComponent({
     },
 
     methods: {
+        setPersonInitDataById(id) {
+            const person = this.peopleData.find(person => person.id === id)
+            Object.assign(this, person)
+            this.switchEditModeHandler(id)
+        },
+
         switchEditModeHandler(id) {
             this.editModeActiveForId = id
+        },
+
+        async submitHandler(id) {
+            const response = await axios.patch(`/api/people/${id}`, this.updatedData)
+            this.peopleData = this.peopleData.map(personData => {
+                if (personData.id === id) {
+                    personData.name = response.data.name
+                    personData.age = response.data.age
+                    personData.gender = response.data.gender
+                    personData.occupation = response.data.occupation
+                }
+                return personData
+            })
+            this.switchEditModeHandler(null)
+        }
+    },
+
+    computed: {
+        updatedData() {
+            return {
+                name: this.name,
+                age: this.age,
+                gender: this.gender,
+                occupation: this.occupation
+            }
         }
     }
 })
 </script>
 
 <template>
-    <tbody v-for="person in people" :key="person.id">
+    <tbody v-for="person in peopleData" :key="person.id">
     <tr scope="row" class="col-12" v-if="editModeActiveForId !== person.id">
         <td class="col-2">{{ person.id }}</td>
         <td class="col-2">{{ person.name }}</td>
@@ -39,7 +83,7 @@ export default defineComponent({
         <td class="col-2">{{ person.gender }}</td>
         <td class="col-2">{{ person.occupation }}</td>
         <td class="col-1">
-            <a href="#" role="button" class="text-decoration-none text-dark" @click.prevent="switchEditModeHandler(person.id)">
+            <a href="#" role="button" class="text-decoration-none text-dark" @click.prevent="setPersonInitDataById(person.id)">
                 <font-awesome-icon :icon="['fas', 'edit']" />
             </a>
         </td>
@@ -50,19 +94,19 @@ export default defineComponent({
     <tr scope="row" class="col-12" v-if="editModeActiveForId === person.id">
         <td class="col-2">{{ person.id }}</td>
         <td class="col-2">
-            <FormControl :id="`${person.id}-u-name`" placeholder="Name" v-model="person.name"/>
+            <FormControl :id="`${person.id}-u-name`" placeholder="Name" v-model.trim="name"/>
         </td>
         <td class="col-2">
-            <FormControl :id="`${person.id}-u-age`" type="number" placeholder="Age" v-model="person.age"/>
+            <FormControl :id="`${person.id}-u-age`" type="number" placeholder="Age" v-model.trim="age"/>
         </td>
         <td class="col-2">
-            <FormControl :id="`${person.id}-u-gender`" placeholder="Gender" v-model="person.gender"/>
+            <FormControl :id="`${person.id}-u-gender`" placeholder="Gender" v-model.trim="gender"/>
         </td>
         <td class="col-2">
-            <FormControl :id="`${person.id}-u-occupation`" placeholder="Occupation" v-model="person.occupation"/>
+            <FormControl :id="`${person.id}-u-occupation`" placeholder="Occupation" v-model.trim="occupation"/>
         </td>
         <td class="col-1">
-            <a href="#" role="button" class="text-decoration-none text-dark" @click.prevent="">
+            <a href="#" role="button" class="text-decoration-none text-dark" @click.prevent="submitHandler(person.id)">
                 <font-awesome-icon :icon="['fas', 'check']" />
             </a>
         </td>

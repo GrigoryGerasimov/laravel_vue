@@ -21,8 +21,16 @@ export default defineComponent({
 
     methods: {
         async storeHandler() {
-            const response = await axios.post('/api/people', this.dataFromInput)
-            console.log(response.data);
+            await axios.post('/api/people', this.dataFromInput)
+            await this.$parent.$refs.index.getPeople()
+            this.resetDataToInit()
+        },
+
+        resetDataToInit() {
+            this.name = null
+            this.age = null
+            this.gender = null
+            this.occupation = null
         }
     },
 

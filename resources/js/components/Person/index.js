@@ -1,4 +1,3 @@
-import StoreComponent from './StoreComponent.vue';
-import IndexComponent from "./IndexComponent.vue";
+import PersonComponent from './PersonComponent.vue'
 
-export { StoreComponent, IndexComponent };
+export { PersonComponent };
