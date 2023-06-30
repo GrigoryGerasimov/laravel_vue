@@ -13,7 +13,7 @@ export default defineComponent({
         TableFooter
     },
 
-    props: ['people', 'onClick']
+    props: ['onClick']
 })
 </script>
 
@@ -21,7 +21,7 @@ export default defineComponent({
     <table class="table text-center">
         <TableHeader/>
         <TableFooter :onClick="onClick"/>
-        <TableBody :people="people"/>
+        <TableBody/>
     </table>
 </template>
 
