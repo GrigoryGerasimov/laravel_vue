@@ -1,8 +1,13 @@
 <script>
 import { defineComponent } from 'vue'
+import { ButtonLink } from '../Common'
 
 export default defineComponent({
     name: 'ShowComponent',
+
+    components: {
+        ButtonLink
+    },
 
     props: {
         person: {
@@ -26,14 +31,14 @@ export default defineComponent({
         <td class='col-2'>{{ person.gender }}</td>
         <td class='col-2'>{{ person.occupation }}</td>
         <td class='col-1'>
-            <a href='#' role='button' class='text-decoration-none text-dark' @click.prevent='onSwitchEditMode(person.id)'>
+            <ButtonLink @click.prevent='onSwitchEditMode'>
                 <font-awesome-icon :icon="['fas', 'edit']" />
-            </a>
+            </ButtonLink>
         </td>
         <td class='col-1'>
-            <a href='#' role='button' class='text-decoration-none text-dark' @click.prevent='onDelete(person.id)'>
+            <ButtonLink @click.prevent='onDelete(person.id)'>
                 <font-awesome-icon :icon="['fas', 'trash']" />
-            </a>
+            </ButtonLink>
         </td>
     </tr>
 </template>

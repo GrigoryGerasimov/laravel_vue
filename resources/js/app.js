@@ -8,11 +8,11 @@ import './bootstrap';
 import { createApp } from 'vue';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faTrash, faEdit, faCheck, faUndo } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faEdit, faCheck, faUndo, faInfo } from '@fortawesome/free-solid-svg-icons'
 import App from './components/App.vue'
 import VueRouter from './router/router.js'
 
-library.add(faTrash, faEdit, faCheck, faUndo)
+library.add(faTrash, faEdit, faCheck, faUndo, faInfo)
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin

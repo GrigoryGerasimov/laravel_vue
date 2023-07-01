@@ -2,12 +2,12 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-    name: "Table"
+    name: 'Table'
 })
 </script>
 
 <template>
-    <table class="table text-center">
+    <table class='table text-center'>
         <slot></slot>
     </table>
 </template>

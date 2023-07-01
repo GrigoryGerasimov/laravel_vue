@@ -1,8 +1,8 @@
 <script>
-import {defineComponent} from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
-    name: "FormControl",
+    name: 'FormControl',
 
     props: {
         id: {
@@ -15,7 +15,7 @@ export default defineComponent({
         },
         extraClasses: {
             type: String,
-            default: "border-0 border-bottom bg-transparent p-0 m-0 text-center"
+            default: 'border-0 border-bottom bg-transparent p-0 m-0 text-center'
         },
         placeholder: String,
         modelValue: [String, Number]
@@ -26,8 +26,8 @@ export default defineComponent({
 </script>
 
 <template>
-    <input :type="inputType" class="form-control" :class="extraClasses" :value="modelValue" :id="id"
-           :placeholder="placeholder"
+    <input :type='inputType' class='form-control' :class='extraClasses' :value='modelValue' :id='id'
+           :placeholder='placeholder'
            @input="$emit('update:modelValue', $event.target.value)"/>
 </template>
 

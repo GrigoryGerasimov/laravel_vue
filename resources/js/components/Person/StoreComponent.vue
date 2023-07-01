@@ -1,6 +1,7 @@
 <script>
 import { defineComponent } from 'vue'
 import { FormControlLabelled, Button } from '../Common'
+import router from '../../router/router.js'
 
 export default defineComponent({
     name: 'StoreComponent',
@@ -19,18 +20,13 @@ export default defineComponent({
         }
     },
 
+    inject: ['getPeople'],
+
     methods: {
         async storeHandler() {
             await axios.post('/api/people', this.dataFromInput)
-            await this.$parent.$refs.index.getPeople()
-            this.resetDataToInit()
-        },
-
-        resetDataToInit() {
-            this.name = null
-            this.age = null
-            this.gender = null
-            this.occupation = null
+            await router.push({ name: 'people.index' })
+            await this.getPeople()
         }
     },
 
