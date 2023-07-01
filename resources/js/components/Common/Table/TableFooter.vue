@@ -3,7 +3,7 @@ import { defineComponent } from 'vue'
 import Button from '../Button.vue'
 
 export default defineComponent({
-    name: "TableFooter",
+    name: 'TableFooter',
 
     components: {
         Button
@@ -16,8 +16,8 @@ export default defineComponent({
 <template>
     <tfoot>
     <tr>
-        <td colspan="4">
-            <Button extra-classes="btn-outline-primary" title="Filter per Age (over 30)" :onClick="onClick"/>
+        <td colspan='4'>
+            <Button extra-classes='btn-outline-primary' title='Filter per Age (over 30)' :onClick='onClick'/>
         </td>
     </tr>
     </tfoot>

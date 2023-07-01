@@ -1,14 +1,18 @@
-import PersonComponent from '../components/Person/PersonComponent.vue'
-import TestComponent from '../components/TestComponent.vue'
-
 const routes = [
     {
         path: '/people',
-        component: PersonComponent
+        component: () => import('../components/Pages/Index.vue'),
+        name: 'people.index'
     },
     {
-        path: '/test',
-        component: TestComponent
+        path: '/people/create',
+        component: () => import('../components/Pages/Create.vue'),
+        name: 'people.store'
+    },
+    {
+        path: '/people/:id',
+        component: () => import('../components/Pages/Show.vue'),
+        name: 'people.show'
     }
 ]
 

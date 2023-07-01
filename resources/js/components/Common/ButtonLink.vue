@@ -2,16 +2,14 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-    name: "TableHeader"
+    name: 'ButtonLink'
 })
 </script>
 
 <template>
-    <thead>
-    <tr scope="row">
+    <a href='#' role='button' class='text-decoration-none text-dark'>
         <slot></slot>
-    </tr>
-    </thead>
+    </a>
 </template>
 
 <style scoped>

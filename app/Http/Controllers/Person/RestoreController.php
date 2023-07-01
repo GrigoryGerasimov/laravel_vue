@@ -12,6 +12,6 @@ class RestoreController extends Controller
     {
         $person->restore();
 
-        return redirect()->route('people.index');
+        return redirect()->route('index', $person);
     }
 }

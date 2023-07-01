@@ -1,20 +1,18 @@
 <script>
 import { defineComponent } from 'vue'
-import { FormControl } from '../'
+import StoreComponent from '../Person/StoreComponent.vue'
 
 export default defineComponent({
-    name: 'TableBody',
+    name: 'Create',
 
     components: {
-        FormControl
+        StoreComponent
     }
 })
 </script>
 
 <template>
-    <tbody>
-    <slot></slot>
-    </tbody>
+    <StoreComponent/>
 </template>
 
 <style scoped>
