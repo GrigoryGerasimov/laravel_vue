@@ -16,38 +16,22 @@ export default defineComponent({
         UpdateComponent
     },
 
-    data() {
-        return {
-            peopleData: this.people
-        }
-    },
-
-    inject: ['people'],
-
-    watch: {
-        people: {
-            handler(newValue) {
-                this.peopleData = newValue
-            }
-        }
-    },
-
     methods: {
         filterHandler() {
-            return this.getPeopleFilteredByAge;
+            this.$store.dispatch('getPeopleFilteredByAge')
         }
     },
 
     computed: {
-        getPeopleFilteredByAge() {
-            return this.peopleData = this.peopleData.filter(person => person.age > 30);
+        peopleData() {
+            return this.$store.getters.people
         }
     }
 })
 </script>
 
 <template>
-    <Table v-show='peopleData.length'>
+    <Table v-show='peopleData'>
         <TableHeader>
             <th>ID</th>
             <th>Name</th>

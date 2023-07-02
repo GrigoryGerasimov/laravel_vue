@@ -1,31 +1,11 @@
 <script>
-import { computed, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
     name: 'App',
 
-    data() {
-        return {
-            people: []
-        }
-    },
-
-    provide() {
-        return {
-            people: computed(() => this.people),
-            getPeople: computed(() => this.getPeople)
-        }
-    },
-
-    methods: {
-        async getPeople() {
-            const response = await axios.get('/api/people')
-            this.people = response.data
-        }
-    },
-
-    async mounted() {
-        await this.getPeople()
+    mounted() {
+        this.$store.dispatch('getPeople')
     }
 })
 </script>

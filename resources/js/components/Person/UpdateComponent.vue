@@ -9,7 +9,7 @@ export default defineComponent({
         person: {
             type: Object
         },
-        onSwitchEditMode: {
+        onReset: {
             type: Function
         },
         onSubmit: {
@@ -27,16 +27,16 @@ export default defineComponent({
     <tr scope='row' class='col-12'>
         <td class='col-2'>{{ person.id }}</td>
         <td class='col-2'>
-            <FormControl :id='`${person.id}-u-name`' placeholder='Name' v-model.trim='person.name'/>
+            <FormControl :id='`${person.id}-u-name`' placeholder='Name' v-model.trim.lazy='person.name'/>
         </td>
         <td class='col-2'>
-            <FormControl :id='`${person.id}-u-age`' type='number' placeholder='Age' v-model.trim='person.age'/>
+            <FormControl :id='`${person.id}-u-age`' type='number' placeholder='Age' v-model.trim.lazy='person.age'/>
         </td>
         <td class='col-2'>
-            <FormControl :id='`${person.id}-u-gender`' placeholder='Gender' v-model.trim='person.gender'/>
+            <FormControl :id='`${person.id}-u-gender`' placeholder='Gender' v-model.trim.lazy='person.gender'/>
         </td>
         <td class='col-2'>
-            <FormControl :id='`${person.id}-u-occupation`' placeholder='Occupation' v-model.trim='person.occupation'/>
+            <FormControl :id='`${person.id}-u-occupation`' placeholder='Occupation' v-model.trim.lazy='person.occupation'/>
         </td>
         <td class='col-1'>
             <a href='#' role='button' class='text-decoration-none text-dark' @click.prevent='onSubmit(person.id, person)'>
@@ -44,7 +44,7 @@ export default defineComponent({
             </a>
         </td>
         <td class='col-1'>
-            <a href='#' role='button' class='text-decoration-none text-dark' @click.prevent='onSwitchEditMode'>
+            <a href='#' role='button' class='text-decoration-none text-dark' @click.prevent='onReset'>
                 <font-awesome-icon :icon="['fas', 'undo']" />
             </a>
         </td>

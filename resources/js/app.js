@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faTrash, faEdit, faCheck, faUndo, faInfo } from '@fortawesome/free-solid-svg-icons'
 import App from './components/App.vue'
 import VueRouter from './router/router.js'
+import VuexStore from './store'
 
 library.add(faTrash, faEdit, faCheck, faUndo, faInfo)
 
@@ -26,6 +27,7 @@ const app = createApp({});
 
 app
     .use(VueRouter)
+    .use(VuexStore)
     .component('app', App)
     .component('font-awesome-icon', FontAwesomeIcon)
 
