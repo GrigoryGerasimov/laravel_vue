@@ -3,7 +3,6 @@ import { defineComponent } from 'vue'
 import { Table, TableBody, TableFooter, TableHeader } from '../Common'
 import ShowComponent from '../Person/ShowComponent.vue'
 import UpdateComponent from '../Person/UpdateComponent.vue'
-import router from '../../router/router.js'
 
 export default defineComponent({
     name: 'Show',
@@ -17,52 +16,36 @@ export default defineComponent({
         UpdateComponent,
     },
 
-    data() {
-        return {
-            peopleData: this.people,
-            editModeActive: false
-        }
-    },
+    computed: {
+        person() {
+            return this.$store.getters.person
+        },
 
-    inject: ['people', 'getPeople'],
-
-    watch: {
-        people: {
-            handler(newValue) {
-                this.peopleData = newValue
-            }
+        editModeActive() {
+            return this.$store.getters.editModeActive
         }
     },
 
     methods: {
         switchEditModeHandler() {
-            this.editModeActive = !this.editModeActive
+            this.$store.dispatch('switchEditModeHandler')
         },
 
-        async submitHandler(id, data) {
-            const response = await axios.patch(`/api/people/${id}`, data)
-            this.peopleData = this.peopleData.map(personData => {
-                if (personData.id === id) Object.assign(personData, response.data)
-                return personData
-            })
-
-            this.switchEditModeHandler()
+        submitHandler(id, data) {
+            this.$store.dispatch('submitHandler', { id, data })
         },
 
-        async deleteHandler(id) {
-            const isDeleted = await axios.delete(`/api/people/${id}`)
-            if (isDeleted) {
-                this.peopleData = this.peopleData.filter(person => person.id !== id)
-                await router.push({ name: 'people.index' })
-                await this.getPeople()
-            }
+        resetHandler() {
+            this.$store.dispatch('resetHandler')
+        },
+
+        deleteHandler(id) {
+            this.$store.dispatch('deleteHandler', id)
         }
     },
 
-    computed: {
-        person() {
-            return this.peopleData.find(person => String(person.id) === this.$route.params.id)
-        }
+    beforeCreate() {
+        this.$store.dispatch('getPerson', this.$route.params.id)
     }
 })
 </script>
@@ -89,7 +72,7 @@ export default defineComponent({
                 v-show='editModeActive'
                 v-if='person'
                 :person='person'
-                :onSwitchEditMode='switchEditModeHandler'
+                :onReset='resetHandler'
                 :onSubmit='submitHandler'
             />
         </TableBody>
